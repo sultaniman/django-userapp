@@ -2,6 +2,8 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth import get_user_model
+from django.conf import settings
+
 from .request import login
 
 import re
@@ -19,11 +21,15 @@ class UserappBackend(object):
                 raise UserModel.DoesNotExist("Userapp account not found")
 
             user = result[0]
-            our_username = re.sub(r"[@\.\-]", "_", username)
-            our_user, created = UserModel.objects.get_or_create(username=our_username[0:29],
-                                                                email=user["email"])
 
-            return our_user
+            if self.passes_checks(user):
+                our_username = re.sub(r"[@\.\-]", "_", username)
+                our_user, created = UserModel.objects.get_or_create(username=our_username[0:29],
+                                                                    email=user["email"])
+
+                return our_user
+            else:
+                return None
         except UserModel.DoesNotExist:
             return None
 
@@ -32,3 +38,17 @@ class UserappBackend(object):
             return UserModel._default_manager.get(pk=user_id)
         except UserModel.DoesNotExist:
             return None
+
+    def passes_checks(self, user):
+        """ Basically checks features and if finds any match returns True """
+        features = getattr(settings, "USERAPP_FEATURES", [])
+        user_features = user.get("features", {})
+
+        if len(features) == 0:
+            return True
+
+        for feature in features:
+            if feature in user_features and user_features[feature]["value"] == True:
+                return True
+
+        return False
