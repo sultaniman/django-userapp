@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 from pip.req import parse_requirements
 
 
-README = open("README.md").read()
+README = open("README.rst").read()
 CHANGES = open("CHANGES").read()
 PACKAGE_DESCRIPTION = "%s\n%s" % (README, CHANGES)
 REQUIREMENTS = [str(r.req) for r in parse_requirements("requirements.txt")]
