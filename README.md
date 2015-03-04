@@ -16,6 +16,11 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 USERAPP_ID = "YOUR_USERAPP_ID"
+USERAPP_USE_FEATURES = True
+
+# if USERAPP_USE_FEATURES = True then 
+# checks will happen againts USERAPP_FEATURE.value=true (enabled/disabled)
+USERAPP_FEATURES = ["USERAPP_FEATURE"]
 ```
 
 ### Note
@@ -26,3 +31,10 @@ Django>=1.7
 
 ### Links
 See <http://userapp.io> for full api documentation of Userapp.
+
+
+### TODO
+
+1. Add more tests,
+2. Add more readme,
+3. Bring more Userapp features
