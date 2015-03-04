@@ -6,14 +6,10 @@ import json
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 
-from django_userapp.backends import UserappBackend
-from django_userapp.request import login
-
 
 User = get_user_model()
-
 CURRENT_DIR = os.path.abspath(os.path.dirname(__file__))
-LOGIN_MOCK = "django_userapp.request.login"
+LOGIN_MOCK = "django_userapp.request"
 USERAPP_LOGIN_MOCK = "django_userapp.request.userapp_api.user.login"
 USER_MOCK = "django_userapp.request.userapp_api.user.get"
 CONF_MOCK = "django_userapp.request.settings"
@@ -47,10 +43,6 @@ class TestDjangoUserapp(TestCase):
     @mock.patch(USER_MOCK)
     def test_userapp_api(self, get_user, userapp_login, our_login):
         userapp_login.return_value = self.ua_result
-        our_login.return_value = self.ua_result
-        result = login(self.request, username=self.user.username, password=self.user.password)
-        self.assertEqual(result, FAKE_RESULT)
-
-    @mock.patch.object(UserappBackend, "authenticate")
-    def test_userapp_auth(self, mock_auth):
-        pass
+        our_login.login.return_value = self.ua_result
+        result = our_login.login(self.request, username=self.user.username, password=self.user.password)
+        self.assertEqual(result, json.loads(FAKE_RESULT))
