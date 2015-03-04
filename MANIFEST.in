@@ -2,4 +2,6 @@ include LICENSE
 include CHANGES
 include AUTHORS
 include README.rst
+include requirements.rst
+include run_tests.sh
 recursive-include django_userapp/tests *
