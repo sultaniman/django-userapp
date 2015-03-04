@@ -22,7 +22,7 @@ setup(
     author_email="sultan.imanhodjaev@gmail.com",
     maintainer="Sultan Imanhodjaev",
     maintainer_email="sultan.imanhodjaev@gmail.com",
-    url="https://github.org/imanhodjaev/django-userapp",
+    url="https://github.com/imanhodjaev/django-userapp",
     license="LGPL",
     include_package_data=True,
     packages=find_packages(),
