@@ -16,6 +16,7 @@ CURRENT_DIR = os.path.abspath(os.path.dirname(__file__))
 LOGIN_MOCK = "django_userapp.request.login"
 USERAPP_LOGIN_MOCK = "django_userapp.request.userapp_api.user.login"
 USER_MOCK = "userapp_api.user.get"
+CONF_MOCK = "django_userapp.request.settings"
 FAKE_RESULT = open(os.path.join(CURRENT_DIR, "userapp_fake_result.json"), "r").read()
 FAKE_USER = open(os.path.join(CURRENT_DIR, "userapp_sample_response.json"), "r").read()
 
@@ -41,7 +42,9 @@ class TestDjangoUserapp(TestCase):
         """ Test user creation / just warming up """
         self.assertTrue(self.created)
 
-    @mock.patch(LOGIN_MOCK, USERAPP_LOGIN_MOCK, USER_MOCK)
+    @mock.patch(LOGIN_MOCK)
+    @mock.patch(USERAPP_LOGIN_MOCK)
+    @mock.patch(USER_MOCK)
     def test_userapp_api(self, get_user, userapp_login, our_login):
         userapp_login.return_value = self.ua_result
         our_login.return_value = self.ua_result

@@ -27,7 +27,8 @@ setup(
     include_package_data=True,
     packages=find_packages(),
     install_requires=REQUIREMENTS,
-    setup_requires=["versiontools >= 1.9.1",],
+    setup_requires=["versiontools >= 1.9.1"],
+    package_data={"package": "tests/*"},
     classifiers=[
         "Development Status :: 1 - Beta",
         "Environment :: Web Environment",
