@@ -1,0 +1,38 @@
+[
+  {
+    "first_name": "Sultan",
+    "last_name": "Imanhodjaev",
+    "user_id": "FAKE_ID",
+    "features": {},
+    "email_verified": false,
+    "created_at": 1415399806,
+    "updated_at": 1425453675,
+    "email": "sultan.imanhodjaev@example.com",
+    "locks": [],
+    "last_login_at": 1425453675,
+    "lock": null,
+    "login": "sultan.imanhodjaev@example.com",
+    "permissions": {
+      "trainer": {
+        "override": false,
+        "value": false
+      },
+      "admin": {
+        "override": true,
+        "value": true
+      },
+      "novice": {
+        "override": true,
+        "value": false
+      }
+    },
+    "ip_address": null,
+    "properties": {
+      "group": {
+        "override": true,
+        "value": "root"
+      }
+    },
+    "subscription": null
+  }
+]

@@ -1,0 +1,8 @@
+.idea/
+*.pyc
+*.tmp
+.tmp
+.swp
+django_userapp.egg*/
+dist/
+build/
