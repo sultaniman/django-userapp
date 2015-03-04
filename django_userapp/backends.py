@@ -42,13 +42,13 @@ class UserappBackend(object):
     def passes_checks(self, user):
         """ Basically checks features and if finds any match returns True """
         user_features = {}
-        features = getattr(settings, "USERAPP_FEATURES", None)
+        features = getattr(settings, "USERAPP_FEATURES", [])
         use_features = getattr(settings, "USERAPP_USE_FEATURES", False)
 
         if "features" in user:
             user_features = user["features"]
 
-        if features is None and user_features is False:
+        if use_features is False:
             return True
 
         for feature in features:
