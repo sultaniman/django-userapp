@@ -19,8 +19,8 @@ class UserappBackend(object):
                 raise UserModel.DoesNotExist("Userapp account not found")
 
             user = result[0]
-            our_username = re.sub("@\-", "_", username)
-            our_user, created = UserModel.objects.get_or_create(username=our_username,
+            our_username = re.sub(r"[@\.\-]", "_", username)
+            our_user, created = UserModel.objects.get_or_create(username=our_username[0:29],
                                                                 email=user["email"])
 
             return our_user

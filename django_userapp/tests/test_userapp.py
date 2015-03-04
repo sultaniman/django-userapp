@@ -6,13 +6,13 @@ import json
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 
+from django_userapp.backends import UserappBackend
+from django_userapp import request
+from django_userapp.request import userapp_api
+
 
 User = get_user_model()
 CURRENT_DIR = os.path.abspath(os.path.dirname(__file__))
-LOGIN_MOCK = "django_userapp.request"
-USERAPP_LOGIN_MOCK = "django_userapp.request.userapp_api.user.login"
-USER_MOCK = "django_userapp.request.userapp_api.user.get"
-CONF_MOCK = "django_userapp.request.settings"
 FAKE_RESULT = open(os.path.join(CURRENT_DIR, "userapp_fake_result.json"), "r").read()
 FAKE_USER = open(os.path.join(CURRENT_DIR, "userapp_sample_response.json"), "r").read()
 
@@ -38,11 +38,39 @@ class TestDjangoUserapp(TestCase):
         """ Test user creation / just warming up """
         self.assertTrue(self.created)
 
-    @mock.patch(LOGIN_MOCK)
-    @mock.patch(USERAPP_LOGIN_MOCK)
-    @mock.patch(USER_MOCK)
-    def test_userapp_api(self, get_user, userapp_login, our_login):
-        userapp_login.return_value = self.ua_result
-        our_login.login.return_value = self.ua_result
-        result = our_login.login(self.request, username=self.user.username, password=self.user.password)
-        self.assertEqual(result, json.loads(FAKE_RESULT))
+
+    @mock.patch.object(UserappBackend, "authenticate")
+    @mock.patch("django_userapp.request.login")
+    @mock.patch("django_userapp.request.userapp_api.user.login")
+    @mock.patch("django_userapp.request.userapp_api.user")
+    def test_userapp_api(self, ua_user, ua_login, our_login, backend):
+        ua_login.return_value = self.ua_result
+        backend.return_value = self.ua_user
+        our_login.login.return_value = self.ua_user
+        ua_user.get.return_value = self.ua_user
+
+        userapp_backend = UserappBackend()
+        result = userapp_backend.authenticate(username=self.user.username,
+                                              password=self.user.password,
+                                              request=self.request)
+
+        request.login(request=self.request,
+                      username=self.user.username,
+                      password=self.user.password)
+
+        userapp_result = userapp_api.user.login(login=self.user.username,
+                                                password=self.user.password)
+
+        backend.assert_called_with(username=self.user.username,
+                                   password=self.user.password,
+                                   request=self.request)
+
+        our_login.assert_called_with(username=self.user.username,
+                                     password=self.user.password,
+                                     request=self.request)
+
+        ua_login.assert_called_with(login=self.user.username,
+                                    password=self.user.password)
+
+        self.assertEqual(result, self.ua_user)
+        self.assertEqual(userapp_result, self.ua_result)
