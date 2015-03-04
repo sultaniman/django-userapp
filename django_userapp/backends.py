@@ -51,7 +51,7 @@ class UserappBackend(object):
             return True
 
         for feature in features:
-            if feature in user_features and user_features[feature]["value"] == True:
+            if feature in user_features and user_features[feature]["value"]:
                 return True
 
         return False
