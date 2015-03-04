@@ -30,7 +30,7 @@ setup(
     setup_requires=["versiontools >= 1.9.1"],
     package_data={"package": "tests/*"},
     classifiers=[
-        "Development Status :: 1 - Beta",
+        "Development Status :: 4 - Beta",
         "Environment :: Web Environment",
         "Framework :: Django",
         "Intended Audience :: Developers",

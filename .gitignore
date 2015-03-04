@@ -6,3 +6,4 @@
 django_userapp.egg*/
 dist/
 build/
+*.egg
