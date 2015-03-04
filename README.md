@@ -1,11 +1,10 @@
-==========================
-Django userapp integration
-==========================
+### Django userapp integration
 
 This is a Django integration with Userapp.io
 
 To use this project you settings should contain
 
+```py
     INSTALLED_APPS = [
         ...
         "django_userapp"
@@ -17,12 +16,13 @@ To use this project you settings should contain
     ]
     
     USERAPP_ID = "YOUR_USERAPP_ID"
+```
 
+### Note
+At Userapp.io you should set first name, last name, email fields for each user
 
-Django version
-==============
+### Django version
 Django>=1.7
 
-Links
-=====
+### Links
 See <http://userapp.io> for full api documentation of Userapp.
