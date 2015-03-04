@@ -1,16 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from setuptools import setup, find_packages
-from pip.req import parse_requirements
 
 
 README = open("README.md").read()
 CHANGES = open("CHANGES").read()
 PACKAGE_DESCRIPTION = "%s\n%s" % (README, CHANGES)
-REQUIREMENTS = ["mock", "userapp"]
-
-REQUIREMENTS.append("distribute")
-
+REQUIREMENTS = ["mock", "userapp", "distribute"]
 
 setup(
     name="django-userapp",
@@ -40,10 +36,7 @@ setup(
         "Natural Language :: English",
         "Operating System :: OS Independent",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 2.7",
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.2",
         "Programming Language :: Python :: 3.3",
         "Programming Language :: Python :: Implementation :: CPython",
         "Programming Language :: Python :: Implementation :: PyPy",
