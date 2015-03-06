@@ -21,6 +21,10 @@ USERAPP_USE_FEATURES = True
 # if USERAPP_USE_FEATURES = True then 
 # checks will happen againts USERAPP_FEATURE.value=true (enabled/disabled)
 USERAPP_FEATURES = ["USERAPP_FEATURE"]
+
+# Will be taken when we have not set user email in Userapp
+# default untitled@email.com
+USERAPP_DEFAULT_EMAIL = "default@email.com"
 ```
 
 ### Note

@@ -21,13 +21,16 @@ class UserappBackend(object):
                 raise UserModel.DoesNotExist("Userapp account not found")
 
             user = result[0]
+            default_email = getattr(settings, "USERAPP_DEFAULT_EMAIL", "untitled@email.com")
 
             if self.passes_checks(user):
+                email = getattr(user, "email", default=default_email)
                 our_username = re.sub(r"[@\.\-]", "_", username)
-                our_user, created = UserModel.objects.get_or_create(email=user["email"])
+                our_user, created = UserModel.objects.get_or_create(email__exact=email)
 
                 if created:     # If user is new user then set username
-                    our_user.username = our_username
+                    our_user.username = our_username[0:29]
+                    our_user.email = email
                     our_user.save()
 
                 if not our_user.password:       # Means that user was created by our backend
