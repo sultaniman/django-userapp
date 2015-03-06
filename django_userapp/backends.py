@@ -24,7 +24,7 @@ class UserappBackend(object):
             default_email = getattr(settings, "USERAPP_DEFAULT_EMAIL", "untitled@email.com")
 
             if self.passes_checks(user):
-                email = getattr(user, "email", default=default_email)
+                email = getattr(user, "email", default_email)
                 our_username = re.sub(r"[@\.\-]", "_", username)
                 our_user, created = UserModel.objects.get_or_create(email__exact=email)
 
