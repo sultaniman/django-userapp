@@ -24,7 +24,8 @@ USERAPP_FEATURES = ["USERAPP_FEATURE"]
 ```
 
 ### Note
-At Userapp.io you should set first name, last name, email fields for each user
+At Userapp.io you must set first name, last name, email fields for each user.
+Emails should be unique and do not intersect with already existing non-userapp emails.
 
 ### Django version
 Django>=1.7
@@ -32,9 +33,10 @@ Django>=1.7
 ### Links
 See <http://userapp.io> for full api documentation of Userapp.
 
-
 ### TODO
 
 1. Add more tests,
 2. Add more readme,
-3. Bring more Userapp features
+3. Bring more Userapp features,
+4. Sync Userapp permissions and features
+ 

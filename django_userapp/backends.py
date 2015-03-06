@@ -24,10 +24,16 @@ class UserappBackend(object):
 
             if self.passes_checks(user):
                 our_username = re.sub(r"[@\.\-]", "_", username)
-                our_user, created = UserModel.objects.get_or_create(username=our_username[0:29],
-                                                                    email=user["email"])
+                our_user, created = UserModel.objects.get_or_create(email=user["email"])
 
-                return our_user
+                if created:     # If user is new user then set username
+                    our_user.username = our_username
+                    our_user.save()
+
+                if not our_user.password:       # Means that user was created by our backend
+                    return our_user
+
+                return None
             else:
                 return None
         except UserModel.DoesNotExist:
