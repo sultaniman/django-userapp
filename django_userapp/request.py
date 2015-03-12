@@ -27,7 +27,10 @@ def login(request, username=None, password=None):
     try:
         userapp_api.set_option("token", "")
         result = userapp_api.user.login(login=username, password=password)
-        request.session["userapp_token"] = result["token"]
+
+        if request:
+            request.session["userapp_token"] = result["token"]
+
         return userapp_api.user.get(user_id="self")
     except userapp.UserAppServiceException:
         return None

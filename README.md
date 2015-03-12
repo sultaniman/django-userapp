@@ -2,7 +2,7 @@
 
 This is a Django integration with Userapp.io
 
-To use this project you settings should contain
+To use this project your settings should contain
 
 ```py
 INSTALLED_APPS = [
