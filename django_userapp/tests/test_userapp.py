@@ -28,7 +28,7 @@ class TestDjangoUserapp(TestCase):
     def setUp(self):
         # note we don't have to store user passwords
         # so just set some dummy password
-        self.user, self.created = User.objects.get_or_create(username="username", 
+        self.user, self.created = User.objects.get_or_create(username="username",
                                                              password="password")
         self.ua_result = json.loads(FAKE_RESULT)
         self.ua_user = json.loads(FAKE_USER)

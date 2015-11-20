@@ -1,3 +1,4 @@
+[![Can I Use Python 3?](https://caniusepython3.com/project/django-userapp.svg?style=flat)](https://caniusepython3.com/project/django-userapp)
 ### Django userapp integration
 
 This is a Django integration with Userapp.io
